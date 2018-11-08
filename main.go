@@ -3,35 +3,28 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"github.com/micro/go-api/proto"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/errors"
-	api "github.com/micro/micro/api/proto"
 	"log"
-	"strings"
+	"microTest/proto"
 )
 
 type Say struct {
-	Client hello.SayService
+	Client hello.HelloService
 }
 
-func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) error {
-	log.Print("Received Say.Hello API request")
+func (s *Say) Hello(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
+	log.Print("Received Say.Say API request")
 
 	name, ok := req.Get["name"]
 	if !ok || len(name.Values) == 0 {
-		return errors.BadRequest("go.micro.api.greeter", "Name cannot be blank")
-	}
-
-	response, err := s.Client.Hello(ctx, &hello.Request{
-		Name: strings.Join(name.Values, " "),
-	})
-	if err != nil {
-		return err
+		return errors.BadRequest("go.micro.api.hello", "Name cannot be blank")
 	}
 
 	rsp.StatusCode = 200
 	b, _ := json.Marshal(map[string]string{
-		"message": response.Msg,
+		"message": "hello, " + name.Values[0],
 	})
 	rsp.Body = string(b)
 
@@ -40,17 +33,10 @@ func (s *Say) Hello(ctx context.Context, req *api.Request, rsp *api.Response) er
 
 func main() {
 	service := micro.NewService(
-		micro.Name("go.micro.api.greeter"),
+		micro.Name("go.micro.api.hello"),
 	)
-
-	// parse command line flags
 	service.Init()
-
-	service.Server().Handle(
-		service.Server().NewHandler(
-			&Say{Client: hello.NewSayService("go.micro.srv.greeter", service.Client())},
-		),
-	)
+	hello.RegisterHelloHandler(service.Server(), &Say{})
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
