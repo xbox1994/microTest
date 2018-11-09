@@ -21,4 +21,16 @@
 使用方式： `micro api`
 
 #### 本应用
-`dep ensure` 
+安装依赖：`dep ensure`
+
+启动方式：结合consul, micro, `go run main.go`
+
+测试方式：
+```bash
+curl -X POST \
+  'http://localhost:8080/hello/hello' \
+  -H 'content-type: application/json' \
+  -d '{
+	"name": "wty"
+}'
+```

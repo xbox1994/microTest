@@ -9,6 +9,25 @@
   revision = "3df31a1ada83e310c2e24b267c8e8b68836547b4"
 
 [[projects]]
+  digest = "1:0a152de447111708ad82dac6bddc7c87294937cdd70d608891ef6787549b1b07"
+  name = "github.com/astaxie/beego"
+  packages = [
+    ".",
+    "config",
+    "context",
+    "context/param",
+    "grace",
+    "logs",
+    "orm",
+    "session",
+    "toolbox",
+    "utils",
+  ]
+  pruneopts = "UT"
+  revision = "053a075344c118a5cc41981b29ef612bb53d20ca"
+  version = "v1.10.1"
+
+[[projects]]
   digest = "1:4be5d1a52c61b74c0a4d62f37c0640f706ae6e07eb73617dd013990d565717d5"
   name = "github.com/go-log/log"
   packages = [
@@ -18,6 +37,14 @@
   pruneopts = "UT"
   revision = "37e2e1f19306361e1fc152a1839f1236149cb4e4"
   version = "v0.1.0"
+
+[[projects]]
+  digest = "1:adea5a94903eb4384abef30f3d878dc9ff6b6b5b0722da25b82e5169216dfb61"
+  name = "github.com/go-sql-driver/mysql"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d523deb1b23d913de5bdada721a6071e71283618"
+  version = "v1.4.0"
 
 [[projects]]
   digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
@@ -77,6 +104,14 @@
   revision = "8b9d33ec2f19cfe2fe9f448f18b033c004c18fd2"
 
 [[projects]]
+  digest = "1:09d01b6b7ca7c63ac5c8169ab49b6ce096127d121a4d60360b28c457ee2c825d"
+  name = "github.com/micro/go-api"
+  packages = ["proto"]
+  pruneopts = "UT"
+  revision = "e026a89eee68f2b24c98427c9607fbba2b5f03e6"
+  version = "v0.4.0"
+
+[[projects]]
   branch = "master"
   digest = "1:1ba6e7291c93f36a9eef6628caaed64a82b1da2508d01f6347c7936f5c2531f6"
   name = "github.com/micro/go-log"
@@ -131,14 +166,6 @@
   packages = ["."]
   pruneopts = "UT"
   revision = "cdf30746f9f70dc7a366d3d885792a092fd83102"
-
-[[projects]]
-  digest = "1:7624c81da72f24467da8d06f5b0983952219c70d59763eaf236cc973673328be"
-  name = "github.com/micro/micro"
-  packages = ["api/proto"]
-  pruneopts = "UT"
-  revision = "e71c20f4e8225a8575721bb958e607f3c4b9bfcc"
-  version = "v0.14.0"
 
 [[projects]]
   branch = "master"
@@ -201,9 +228,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:d5891c5bca9c62e5d394ca26491d2b710a1dc08cedeb0ca8f9ac4c3305120b02"
+  digest = "1:354e77e5d35347335390525b83ec80fd942374968bf492b5553aaf3fc6897f01"
   name = "golang.org/x/crypto"
   packages = [
+    "acme",
+    "acme/autocert",
     "ed25519",
     "ed25519/internal/edwards25519",
   ]
@@ -233,13 +262,35 @@
   pruneopts = "UT"
   revision = "66b7b1311ac80bbafcd2daeef9a5e6e2cd1e2399"
 
+[[projects]]
+  digest = "1:c25289f43ac4a68d88b02245742347c94f1e108c534dda442188015ff80669b3"
+  name = "google.golang.org/appengine"
+  packages = ["cloudsql"]
+  pruneopts = "UT"
+  revision = "4a4468ece617fc8205e99368fa2200e9d1fad421"
+  version = "v1.3.0"
+
+[[projects]]
+  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/astaxie/beego",
+    "github.com/astaxie/beego/orm",
+    "github.com/go-sql-driver/mysql",
+    "github.com/golang/protobuf/proto",
+    "github.com/micro/go-api/proto",
     "github.com/micro/go-micro",
+    "github.com/micro/go-micro/client",
     "github.com/micro/go-micro/errors",
-    "github.com/micro/micro/api/proto",
+    "github.com/micro/go-micro/server",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

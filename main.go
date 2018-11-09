@@ -3,11 +3,13 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/micro/go-api/proto"
 	"github.com/micro/go-micro"
-	"github.com/micro/go-micro/errors"
 	"log"
 	"microTest/proto"
+	"microTest/request"
+	"microTest/service"
 )
 
 type Say struct {
@@ -15,19 +17,26 @@ type Say struct {
 }
 
 func (s *Say) Hello(ctx context.Context, req *go_api.Request, rsp *go_api.Response) error {
-	log.Print("Received Say.Say API request")
+	var helloRequest request.HelloRequest
+	json.Unmarshal([]byte(req.Body), &helloRequest)
 
-	name, ok := req.Get["name"]
-	if !ok || len(name.Values) == 0 {
-		return errors.BadRequest("go.micro.api.hello", "Name cannot be blank")
+	result, codeE := service.Do(&helloRequest)
+	if codeE != nil {
+		rsp.StatusCode = 500
+		errBody, _ := json.Marshal(request.HelloResponse{
+			Code:    0,
+			Message: fmt.Sprintf("%v", codeE),
+		})
+		rsp.Body = string(errBody)
+		return nil
 	}
 
 	rsp.StatusCode = 200
-	b, _ := json.Marshal(map[string]string{
-		"message": "hello, " + name.Values[0],
+	errBody, _ := json.Marshal(request.HelloResponse{
+		Code:    0,
+		Message: result,
 	})
-	rsp.Body = string(b)
-
+	rsp.Body = string(errBody)
 	return nil
 }
 
