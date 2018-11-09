@@ -2,7 +2,7 @@ package dao
 
 import (
 	"github.com/astaxie/beego/orm"
-	"microTest/model"
+	"microTemplate/model"
 )
 
 type HelloDao struct {

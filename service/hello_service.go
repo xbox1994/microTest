@@ -1,8 +1,8 @@
 package service
 
 import (
-	"microTest/dao"
-	"microTest/request"
+	"microTemplate/dao"
+	"microTemplate/request"
 )
 
 func Do(request *request.HelloRequest) (string, error) {

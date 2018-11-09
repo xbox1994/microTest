@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"github.com/micro/go-api/proto"
 	"github.com/micro/go-micro"
-	"microTest/proto"
-	"microTest/request"
-	"microTest/service"
+	"microTemplate/proto"
+	"microTemplate/request"
+	"microTemplate/service"
 	"os"
 )
 

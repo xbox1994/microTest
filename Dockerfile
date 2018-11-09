@@ -2,8 +2,8 @@ FROM alpine:latest
 RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
 WORKDIR /app
-ADD microTest .
+ADD microTemplate .
 ADD conf conf
-RUN chmod +x microTest
+RUN chmod +x microTemplate
 
-ENTRYPOINT [ "./microTest" ]
+ENTRYPOINT [ "./microTemplate" ]

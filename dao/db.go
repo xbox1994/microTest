@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	DATABASE      = "microTest"
+	DATABASE      = "microTemplate"
 	MAX_IDLE_CONN = 10
 	MAX_OPEN_CONN = 100
 )
