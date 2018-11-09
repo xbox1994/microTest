@@ -23,6 +23,10 @@ spec:
         - name: backend-http
           containerPort: 8080
         env:
+        - name: MICRO_REGISTRY_ADDRESS
+          value: consul-service:8500
+        - name: MICRO_SERVER_ADDRESS
+          value: :8080
         - name: ENV_MODE
           value: ${env_mode}
 ---

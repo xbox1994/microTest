@@ -1,15 +1,16 @@
 package main
 
 import (
+	"common/log"
 	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/micro/go-api/proto"
 	"github.com/micro/go-micro"
-	"log"
 	"microTest/proto"
 	"microTest/request"
 	"microTest/service"
+	"os"
 )
 
 type Say struct {
@@ -48,6 +49,7 @@ func main() {
 	hello.RegisterHelloHandler(service.Server(), &Say{})
 
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		log.Error(nil, err)
+		os.Exit(1)
 	}
 }
